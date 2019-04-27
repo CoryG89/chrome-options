@@ -41,6 +41,20 @@ chrome.options.fields.url = (value, save, option) => {
   return $field;
 };
 
+chrome.options.fields.number = (value, save, option) => {
+  const $field = chrome.options.fields.text(value, save, option);
+  $field.setAttribute('type', 'number');
+  const min = option && option.min;
+  if (min) {
+    $field.setAttribute('min', min);
+  }
+  const max = option && option.max;
+  if (max) {
+    $field.setAttribute('max', max); 
+  }
+  return $field;
+};
+
 chrome.options.fields.select = (value, save, option) => {
   const valueMap = {};
   const $select = h('select', {
